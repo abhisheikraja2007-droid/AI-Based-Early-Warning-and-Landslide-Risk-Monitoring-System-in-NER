@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "roc_auc": 0.9926,
+    "pr_auc": 0.9771,
+    "precision": 0.9167,
+    "recall": 0.9457,
+    "f1": 0.931,
+    "confusion_matrix": [
+      [
+        644,
+        19
+      ],
+      [
+        12,
+        209
+      ]
+    ],
+    "test_instances": 884
+  },
+  "feature_importance_gain": {
+    "rainfall_api_7d": 0.30233144760131836,
+    "spatial_susceptibility": 0.23629586398601532,
+    "smap_surface_sm": 0.1459929496049881,
+    "smap_soil_water_index": 0.05339140444993973,
+    "smap_rootzone_sm": 0.05329203978180885,
+    "smap_saturation_ratio": 0.052266668528318405,
+    "rainfall_24h_mm": 0.045167773962020874,
+    "rainfall_3d_sum_mm": 0.039992205798625946,
+    "rainfall_7d_antecedent_mm": 0.024229833856225014,
+    "rainfall_intensity_ratio": 0.01904320903122425,
+    "rainfall_acceleration_mm": 0.014890827238559723,
+    "smap_pore_pressure_proxy": 0.013105719350278378
+  },
+  "shap_global_importance": {
+    "spatial_susceptibility": 3.998415470123291,
+    "smap_surface_sm": 0.6036920547485352,
+    "rainfall_7d_antecedent_mm": 0.3536464273929596,
+    "rainfall_api_7d": 0.31583869457244873,
+    "rainfall_24h_mm": 0.30163806676864624,
+    "rainfall_3d_sum_mm": 0.25595372915267944,
+    "smap_rootzone_sm": 0.20661744475364685,
+    "smap_soil_water_index": 0.15550526976585388,
+    "rainfall_intensity_ratio": 0.09173334389925003,
+    "rainfall_acceleration_mm": 0.05226488783955574,
+    "smap_pore_pressure_proxy": 0.013158141635358334,
+    "smap_saturation_ratio": 0.011945975944399834
+  },
+  "lead_time_window": "6-to-24 hours prior to event",
+  "features": [
+    "spatial_susceptibility",
+    "rainfall_24h_mm",
+    "rainfall_3d_sum_mm",
+    "rainfall_7d_antecedent_mm",
+    "rainfall_api_7d",
+    "rainfall_intensity_ratio",
+    "rainfall_acceleration_mm",
+    "smap_surface_sm",
+    "smap_rootzone_sm",
+    "smap_soil_water_index",
+    "smap_saturation_ratio",
+    "smap_pore_pressure_proxy"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "since_timestamp": "2022-06-28T02:00:00Z",
+  "generated_at": "2026-09-29T16:39:40.119534+00:00",
+  "total_corridor_segments": 10,
+  "delta_count": 1,
+  "bandwidth_saved_percent": 90.0,
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            93.68,
+            24.77
+          ],
+          [
+            93.64,
+            24.71
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "NH37-SEG-04",
+        "corridor_name": "NH-37 Imphal-Jiribam",
+        "chainage_km": "Km 38.0 - Km 50.0",
+        "location_name": "Tupul Railway Yard / Ijei Confluence",
+        "hazard_level": "EMERGENCY_EVACUATION",
+        "previous_hazard_level": "NORMAL",
+        "landslide_probability": 0.8856,
+        "transition_timestamp": "2022-06-28T02:00:00Z",
+        "delta_type": "HAZARD_ESCALATION",
+        "rainfall_24h_mm": 2.4,
+        "smap_soil_moisture": 0.28,
+        "recommended_action": "RED ALERT: Complete highway closure. Order immediate vehicle stoppage & evacuation to safe shelters."
+      }
+    }
+  ]
+}

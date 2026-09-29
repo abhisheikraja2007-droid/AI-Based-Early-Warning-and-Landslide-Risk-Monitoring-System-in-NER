@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "since_timestamp": "2022-06-29T14:00:00Z",
+  "generated_at": "2026-09-29T16:39:40.336808+00:00",
+  "total_corridor_segments": 10,
+  "delta_count": 2,
+  "bandwidth_saved_percent": 80.0,
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            93.68,
+            24.77
+          ],
+          [
+            93.64,
+            24.71
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "NH37-SEG-04",
+        "corridor_name": "NH-37 Imphal-Jiribam",
+        "chainage_km": "Km 38.0 - Km 50.0",
+        "location_name": "Tupul Railway Yard / Ijei Confluence",
+        "hazard_level": "EMERGENCY_EVACUATION",
+        "previous_hazard_level": "EMERGENCY_EVACUATION",
+        "landslide_probability": 0.9841,
+        "transition_timestamp": "2022-06-29T14:00:00Z",
+        "delta_type": "HAZARD_UPDATE",
+        "rainfall_24h_mm": 65.25,
+        "smap_soil_moisture": 0.48,
+        "recommended_action": "RED ALERT: Complete highway closure. Order immediate vehicle stoppage & evacuation to safe shelters."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            93.64,
+            24.71
+          ],
+          [
+            93.59,
+            24.73
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "NH37-SEG-05",
+        "corridor_name": "NH-37 Imphal-Jiribam",
+        "chainage_km": "Km 50.0 - Km 62.0",
+        "location_name": "Noney Bridge & River Gorge",
+        "hazard_level": "HIGH_EARLY_WARNING",
+        "previous_hazard_level": "HIGH_EARLY_WARNING",
+        "landslide_probability": 0.5129,
+        "transition_timestamp": "2022-06-29T14:00:00Z",
+        "delta_type": "HAZARD_UPDATE",
+        "rainfall_24h_mm": 60.75,
+        "smap_soil_moisture": 0.48,
+        "recommended_action": "ORANGE ALERT: Divert heavy freight. Deploy SDRF/BRO clearing bulldozers to high-risk chainage."
+      }
+    }
+  ]
+}
