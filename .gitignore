@@ -1,0 +1,35 @@
+# Python Virtual Environment
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Large Satellite & Meteorological Datasets (>100MB)
+TrainData/
+ValidData/
+TestData/
+*.h5
+*.hdf5
+RF25_ind2025_rfp25.nc
+
+# PyTorch Checkpoints (>100MB - GitHub hard limit)
+checkpoints/*.pt
+
+# User Uploads & Temporary artifacts
+uploads/citizen_photos/*
+!uploads/citizen_photos/.gitkeep
+data/citizen_reports_fallback.json
+
+# Environment variables
+.env
