@@ -31,9 +31,22 @@ class Settings:
     MONGODB_DB_NAME: str = os.getenv("MONGODB_DB_NAME", "landslide_sih_db")
     CITIZEN_REPORTS_COLLECTION: str = "citizen_reports"
 
+    # ISRO Bhuvan Geo-Platform Credentials
+    BHUVAN_ROUTING_API_KEY: str = os.getenv("BHUVAN_ROUTING_API_KEY", "")
+
     # Storage paths
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "uploads/citizen_photos")
 
 
+# Attempt to load .env file if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 settings = Settings()
+# Refresh settings after dotenv load
+settings.BHUVAN_ROUTING_API_KEY = os.getenv("BHUVAN_ROUTING_API_KEY", settings.BHUVAN_ROUTING_API_KEY)
+
 os.makedirs(settings.UPLOAD_DIR, exist_ok=True)

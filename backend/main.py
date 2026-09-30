@@ -20,7 +20,7 @@ from fastapi.responses import JSONResponse
 from backend.config import settings
 from backend.model_cache import model_cache
 from backend.database import db_manager
-from backend.routers import inference, citizen_reports, sync, corridors, replay
+from backend.routers import inference, citizen_reports, sync, corridors, replay, routing
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -95,6 +95,7 @@ app.include_router(citizen_reports.router, prefix=settings.API_V1_PREFIX)
 app.include_router(sync.router, prefix=settings.API_V1_PREFIX)
 app.include_router(corridors.router, prefix=settings.API_V1_PREFIX)
 app.include_router(replay.router, prefix=settings.API_V1_PREFIX)
+app.include_router(routing.router, prefix=settings.API_V1_PREFIX)
 
 
 # ==============================================================================
