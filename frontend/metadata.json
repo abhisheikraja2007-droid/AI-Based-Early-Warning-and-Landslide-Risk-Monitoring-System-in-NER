@@ -1,0 +1,6 @@
+{
+  "name": "Drishti-NER Tactical Telemetry",
+  "description": "AI-powered landslide early warning and geospatial corridor surveillance system for NH-37 (Imphal-Jiribam) in Manipur.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
