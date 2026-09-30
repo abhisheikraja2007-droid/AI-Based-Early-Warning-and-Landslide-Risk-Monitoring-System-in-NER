@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand & Subtitle */}
         <div className="flex items-center gap-3">
           <img
-            src="https://lh3.googleusercontent.com/aida/AEtjO1Wi4tEsPN-qUqpFFYspCFECFeVDHuIrG4EiYnwU2AONznkf9ux_Oz0eKfKRwN5GRvH2oyGQbdyLjt-WBvMAxfmM6jLxnnELVj2dyyc-5mgsdFA9I9Qx-kagBBbXBtzDkKEtWY9xS44Nkc4vCiQkls8QNNvC4sKq4VgSQe6F96nPKbwdfYo0BZzuspRsZlLFaeHfOE96h6ubrM5eYcvcTqYJYxoY2IisE2Jd8tomrcb7SM5O85CTZso0Ibg"
+            src="/drishti_logo.jpg"
             alt="Drishti-NER Geospatial Radar Logo"
             className="h-9 w-auto object-contain drop-shadow-[0_0_8px_rgba(76,215,246,0.5)]"
           />
