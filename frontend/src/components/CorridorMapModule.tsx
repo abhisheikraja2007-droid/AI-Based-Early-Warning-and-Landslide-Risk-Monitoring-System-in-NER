@@ -6,7 +6,8 @@ import {
   HISTORICAL_SCRUBBER_STEPS,
 } from '../data/mockTelemetry';
 import { soundFx } from '../utils/audioAlert';
-import { api } from '../services/api';
+import { api, EvacuationRouteResponse } from '../services/api';
+import { LiveSatelliteMap } from './LiveSatelliteMap';
 
 interface CorridorMapModuleProps {
   onOpenReportModal: () => void;
@@ -25,15 +26,17 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
   const [currentStepIndex, setCurrentStepIndex] = useState(3); // default T-12h Critical
   const [isPlayingScrubber, setIsPlayingScrubber] = useState(false);
   const [liveSegments, setLiveSegments] = useState<CorridorSegment[]>(INITIAL_SEGMENTS);
+  const [bhuvanRoute, setBhuvanRoute] = useState<EvacuationRouteResponse | null>(null);
 
   // Map layer toggles
   const [showPytorchHeatmap, setShowPytorchHeatmap] = useState(true);
   const [showRainfallRadar, setShowRainfallRadar] = useState(true);
   const [showSmapMoisture, setShowSmapMoisture] = useState(true);
   const [showShelters, setShowShelters] = useState(true);
-  const [mapViewMode, setMapViewMode] = useState<'satellite' | 'contour' | 'hybrid'>('hybrid');
+  const [mapViewMode, setMapViewMode] = useState<'satellite' | 'tactical'>('satellite');
   const [is3DTilted, setIs3DTilted] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
+
 
   // Selected Segment
   const [selectedSegmentId, setSelectedSegmentId] = useState<number>(4); // default Tupul Km 39-46
@@ -71,7 +74,20 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
       }
     };
     fetchInitialCorridors();
+
+    const fetchBhuvanRoute = async () => {
+      try {
+        const routeRes = await api.getEvacuationRoute(24.77, 93.68, 24.81, 93.94, true);
+        if (routeRes && routeRes.route_summary) {
+          setBhuvanRoute(routeRes);
+        }
+      } catch (err) {
+        console.warn('Bhuvan route load failed:', err);
+      }
+    };
+    fetchBhuvanRoute();
   }, []);
+
 
   // Active step data
   const step = HISTORICAL_SCRUBBER_STEPS[currentStepIndex];
@@ -273,12 +289,71 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         {/* LEFT: CARTOGRAPHIC TELEMETRY HUD (col-span-8) */}
         <div className="xl:col-span-8 flex flex-col gap-3">
-          {/* MAP CANVAS CONTAINER */}
-          <div
-            className={`relative w-full h-[620px] bg-[#060e20] rounded-xl overflow-hidden border border-[#222a3d] shadow-2xl flex flex-col transition-all duration-300 ${
-              is3DTilted ? 'perspective-[1000px]' : ''
-            }`}
-          >
+          {/* Top Map Engine Mode Switcher Bar */}
+          <div className="flex flex-wrap items-center justify-between bg-[#131b2e] p-2.5 rounded-xl border border-[#222a3d] shadow-lg gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs text-[#869397] uppercase tracking-wider font-semibold pl-1">
+                // MAP_ENGINE:
+              </span>
+              <div className="flex items-center gap-1 bg-[#060e20] p-1 rounded-lg border border-[#222a3d]">
+                <button
+                  type="button"
+                  onClick={() => setMapViewMode('satellite')}
+                  className={`px-3 py-1 font-mono text-xs rounded font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    mapViewMode === 'satellite'
+                      ? 'bg-[#06b6d4] text-[#003640] shadow'
+                      : 'text-[#869397] hover:text-[#dae2fc]'
+                  }`}
+                >
+                  <span>🛰️ Live Satellite GIS</span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMapViewMode('tactical')}
+                  className={`px-3 py-1 font-mono text-xs rounded font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    mapViewMode === 'tactical'
+                      ? 'bg-[#06b6d4] text-[#003640] shadow'
+                      : 'text-[#869397] hover:text-[#dae2fc]'
+                  }`}
+                >
+                  <span>📐 Tactical Vector HUD</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-2 font-mono text-xs pr-1">
+              <span className="text-[#dae2fc]">NH-37 Imphal–Jiribam</span>
+              <span className="text-[#869397]">•</span>
+              <span className="text-[#4cd7f6]">Tupul 24.855°N, 93.697°E</span>
+              <span className="text-[#869397]">•</span>
+              <span className="text-[#10b981] font-bold">ESRI Sub-Meter Feed</span>
+            </div>
+          </div>
+
+          {/* Conditional Map View: Live Satellite GIS vs Tactical HUD */}
+          {mapViewMode === 'satellite' ? (
+            <LiveSatelliteMap
+              segments={segments}
+              selectedSegmentId={selectedSegmentId}
+              onSelectSegment={(seg) => {
+                setSelectedSegmentId(seg.id);
+                onSelectSegment(seg);
+              }}
+              bhuvanRoute={bhuvanRoute}
+              showPytorchHeatmap={showPytorchHeatmap}
+              showRainfallRadar={showRainfallRadar}
+              showShelters={showShelters}
+              currentStepIndex={currentStepIndex}
+            />
+          ) : (
+            /* MAP CANVAS CONTAINER (TACTICAL HUD) */
+            <div
+              className={`relative w-full h-[620px] bg-[#060e20] rounded-xl overflow-hidden border border-[#222a3d] shadow-2xl flex flex-col transition-all duration-300 ${
+                is3DTilted ? 'perspective-[1000px]' : ''
+              }`}
+            >
+
             {/* SATELLITE TERRAIN BACKDROP (from the user image asset / mockup) */}
             <div
               className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${
@@ -816,6 +891,7 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
               </div>
             </div>
           </div>
+          )}
 
           {/* CORRIDOR SEGMENT STATUS TICKER BAR */}
           <div className="bg-[#131b2e] p-3 rounded border border-[#222a3d] flex flex-col gap-2 shadow-md">
