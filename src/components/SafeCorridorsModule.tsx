@@ -94,17 +94,17 @@ export const SafeCorridorsModule: React.FC = () => {
   return (
     <div className="flex flex-col gap-4 w-full">
       {/* Header Bar */}
-      <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-wrap items-center justify-between gap-3 shadow-lg">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+            <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
               // EVACUATION PASSAGE & RELIEF LOGISTICS
             </span>
             <span className="px-2 py-0.5 rounded bg-[#10b981]/20 text-[#10b981] font-mono text-[10px] font-bold">
               ISRO BHUVAN VERIFIED PASSAGE
             </span>
           </div>
-          <span className="font-headline text-xl text-[#dae2fc] font-bold">
+          <span className="font-headline text-xl text-on-surface font-bold">
             Safe Corridor Navigation & Emergency Shelters
           </span>
         </div>
@@ -113,7 +113,7 @@ export const SafeCorridorsModule: React.FC = () => {
           <button
             type="button"
             onClick={handleStartSim}
-            className="px-3.5 py-2 rounded bg-[#06b6d4] hover:bg-[#4cd7f6] text-[#003640] font-mono text-xs font-bold uppercase flex items-center gap-2 shadow-lg transition-all cursor-pointer"
+            className="px-3.5 py-2 rounded bg-primary-container hover:bg-primary text-on-primary font-mono text-xs font-bold uppercase flex items-center gap-2 shadow-lg transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">turn_sharp_right</span>
             <span>Simulate GPS Turn-by-Turn</span>
@@ -123,19 +123,19 @@ export const SafeCorridorsModule: React.FC = () => {
 
       {/* GPS Simulation Active Banner */}
       {isSimulatingGps && (
-        <div className="bg-[#060e20] p-4 rounded-xl border-2 border-[#4cd7f6] flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_0_24px_rgba(76,215,246,0.25)] animate-in fade-in">
+        <div className="bg-surface-container-lowest p-4 rounded-xl border-2 border-primary flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_0_24px_rgba(76,215,246,0.25)] animate-in fade-in">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-[#4cd7f6] text-[#003640] flex items-center justify-center font-bold shrink-0">
+            <div className="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shrink-0">
               <span className="material-symbols-outlined text-[28px]">navigation</span>
             </div>
             <div className="flex flex-col">
-              <span className="font-mono text-[10px] text-[#4cd7f6] uppercase font-bold tracking-wider">
+              <span className="font-mono text-[10px] text-primary uppercase font-bold tracking-wider">
                 ACTIVE GPS NAVIGATION • STEP {navStepIndex + 1} OF {turnByTurnSteps.length}
               </span>
-              <span className="font-headline text-lg font-bold text-[#dae2fc]">
+              <span className="font-headline text-lg font-bold text-on-surface">
                 {turnByTurnSteps[navStepIndex].instruction}
               </span>
-              <span className="font-mono text-xs text-[#bcc9cd]">
+              <span className="font-mono text-xs text-on-surface-variant">
                 Distance: {turnByTurnSteps[navStepIndex].distance} • Elevation:{' '}
                 {turnByTurnSteps[navStepIndex].elevation} • {turnByTurnSteps[navStepIndex].note}
               </span>
@@ -146,14 +146,14 @@ export const SafeCorridorsModule: React.FC = () => {
             <button
               type="button"
               onClick={handleNextStep}
-              className="px-4 py-2 bg-[#4cd7f6] text-[#003640] font-mono text-xs font-bold rounded hover:bg-[#a5f3fc] transition-colors cursor-pointer"
+              className="px-4 py-2 bg-primary text-on-primary font-mono text-xs font-bold rounded hover:bg-[#a5f3fc] transition-colors cursor-pointer"
             >
               {navStepIndex < turnByTurnSteps.length - 1 ? 'Next Waypoint' : 'Arrive at Shelter'}
             </button>
             <button
               type="button"
               onClick={() => setIsSimulatingGps(false)}
-              className="px-3 py-2 bg-[#222a3d] text-[#bcc9cd] font-mono text-xs rounded hover:text-white transition-colors cursor-pointer"
+              className="px-3 py-2 bg-surface-container-high text-on-surface-variant font-mono text-xs rounded hover:text-white transition-colors cursor-pointer"
             >
               Exit Nav
             </button>
@@ -165,7 +165,7 @@ export const SafeCorridorsModule: React.FC = () => {
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         {/* Left Column: Route Cards (col-span-7) */}
         <div className="xl:col-span-7 flex flex-col gap-3">
-          <span className="font-mono text-xs text-[#869397] uppercase tracking-wider font-semibold">
+          <span className="font-mono text-xs text-outline uppercase tracking-wider font-semibold">
             Corridor Route Options Comparison
           </span>
 
@@ -183,16 +183,16 @@ export const SafeCorridorsModule: React.FC = () => {
                 }}
                 className={`p-4 rounded-xl border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#171f32] border-[#4cd7f6] shadow-xl'
-                    : 'bg-[#131b2e] border-[#222a3d] hover:bg-[#171f32]'
+                    ? 'bg-surface-container border-primary shadow-xl'
+                    : 'bg-surface-container-low border-surface-container-high hover:bg-surface-container'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex flex-col">
-                    <span className="font-headline text-base font-bold text-[#dae2fc]">
+                    <span className="font-headline text-base font-bold text-on-surface">
                       {route.name}
                     </span>
-                    <span className="font-mono text-xs text-[#869397]">
+                    <span className="font-mono text-xs text-outline">
                       {route.origin} → {route.destination}
                     </span>
                   </div>
@@ -201,8 +201,8 @@ export const SafeCorridorsModule: React.FC = () => {
                       isClear
                         ? 'bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/40'
                         : isBlocked
-                        ? 'bg-[#a40217]/50 text-[#ffb3ad] border border-[#ef4444]/40 animate-pulse'
-                        : 'bg-[#ffb95f]/20 text-[#ffb95f]'
+                        ? 'bg-secondary-container/50 text-secondary border border-[#ef4444]/40 animate-pulse'
+                        : 'bg-tertiary/20 text-tertiary'
                     }`}
                   >
                     {route.status}
@@ -211,29 +211,29 @@ export const SafeCorridorsModule: React.FC = () => {
 
                 {/* Metrics */}
                 <div className="grid grid-cols-3 gap-2 mt-3 text-xs font-mono">
-                  <div className="p-2 bg-[#131b2e] rounded border border-[#222a3d]">
-                    <span className="text-[#869397] block text-[10px]">Transit Time</span>
-                    <span className={`font-bold ${isBlocked ? 'text-[#ffb3ad]' : 'text-white'}`}>
+                  <div className="p-2 bg-surface-container-low rounded border border-surface-container-high">
+                    <span className="text-outline block text-[10px]">Transit Time</span>
+                    <span className={`font-bold ${isBlocked ? 'text-secondary' : 'text-white'}`}>
                       {isBlocked ? 'BLOCKED' : `${route.transitMins} mins`}
                     </span>
                   </div>
-                  <div className="p-2 bg-[#131b2e] rounded border border-[#222a3d]">
-                    <span className="text-[#869397] block text-[10px]">Corridor Distance</span>
+                  <div className="p-2 bg-surface-container-low rounded border border-surface-container-high">
+                    <span className="text-outline block text-[10px]">Corridor Distance</span>
                     <span className="text-white font-bold">{route.distanceKm} km</span>
                   </div>
-                  <div className="p-2 bg-[#131b2e] rounded border border-[#222a3d]">
-                    <span className="text-[#869397] block text-[10px]">Hazard Avoidance</span>
-                    <span className="text-[#4cd7f6] font-bold">
+                  <div className="p-2 bg-surface-container-low rounded border border-surface-container-high">
+                    <span className="text-outline block text-[10px]">Hazard Avoidance</span>
+                    <span className="text-primary font-bold">
                       {route.hazardsAvoided} Critical Slide Avoided
                     </span>
                   </div>
                 </div>
 
                 {/* Highlights */}
-                <ul className="mt-3 flex flex-col gap-1 text-xs font-body text-[#bcc9cd]">
+                <ul className="mt-3 flex flex-col gap-1 text-xs font-body text-on-surface-variant">
                   {route.routeHighlights.map((hl, i) => (
                     <li key={i} className="flex items-start gap-1.5">
-                      <span className="material-symbols-outlined text-[14px] text-[#4cd7f6] shrink-0 mt-0.5">
+                      <span className="material-symbols-outlined text-[14px] text-primary shrink-0 mt-0.5">
                         check
                       </span>
                       <span>{hl}</span>
@@ -247,22 +247,22 @@ export const SafeCorridorsModule: React.FC = () => {
 
         {/* Right Column: Shelters & Relief Centers (col-span-5) */}
         <div className="xl:col-span-5 flex flex-col gap-4">
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-col gap-3 shadow-xl">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-col gap-3 shadow-xl">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+              <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
                 // ACTIVE EMERGENCY RELIEF SHELTERS
               </span>
               <span className="font-mono text-xs text-[#10b981] font-bold">2 Hubs Open</span>
             </div>
 
             {/* Shelter 1: Noney Community Health Center */}
-            <div className="p-3 bg-[#171f32] rounded-lg border border-[#222a3d] flex flex-col gap-2">
+            <div className="p-3 bg-surface-container rounded-lg border border-surface-container-high flex flex-col gap-2">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="font-headline text-sm font-bold text-[#dae2fc]">
+                  <span className="font-headline text-sm font-bold text-on-surface">
                     Noney Community Health Center
                   </span>
-                  <span className="font-mono text-xs text-[#4cd7f6] block">
+                  <span className="font-mono text-xs text-primary block">
                     Coordinates: 24°51'08"N, 93°38'02"E
                   </span>
                 </div>
@@ -273,49 +273,49 @@ export const SafeCorridorsModule: React.FC = () => {
 
               {/* Capacity Bar */}
               <div className="flex flex-col gap-1">
-                <div className="flex justify-between font-mono text-[11px] text-[#869397]">
+                <div className="flex justify-between font-mono text-[11px] text-outline">
                   <span>Occupancy (108 / 250)</span>
-                  <span className="text-[#dae2fc]">43.2% Full</span>
+                  <span className="text-on-surface">43.2% Full</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#222a3d] overflow-hidden">
-                  <div className="h-full bg-[#4cd7f6] w-[43%]" />
+                <div className="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                  <div className="h-full bg-primary w-[43%]" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-[#bcc9cd] pt-1">
+              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-on-surface-variant pt-1">
                 <span>Medical: 4 Doctors, 8 Nurses</span>
                 <span>Water: 15,000L Potable</span>
               </div>
             </div>
 
             {/* Shelter 2: Tupul Higher Secondary School Camp */}
-            <div className="p-3 bg-[#171f32] rounded-lg border border-[#222a3d] flex flex-col gap-2">
+            <div className="p-3 bg-surface-container rounded-lg border border-surface-container-high flex flex-col gap-2">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="font-headline text-sm font-bold text-[#dae2fc]">
+                  <span className="font-headline text-sm font-bold text-on-surface">
                     Tupul Upper School Relief Camp
                   </span>
-                  <span className="font-mono text-xs text-[#ffb95f] block">
+                  <span className="font-mono text-xs text-tertiary block">
                     High Elevation Safe Zone (940m MSL)
                   </span>
                 </div>
-                <span className="px-2 py-0.5 rounded bg-[#ffb95f]/20 text-[#ffb95f] font-mono text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded bg-tertiary/20 text-tertiary font-mono text-[10px] font-bold">
                   85 Beds Available
                 </span>
               </div>
 
               {/* Capacity Bar */}
               <div className="flex flex-col gap-1">
-                <div className="flex justify-between font-mono text-[11px] text-[#869397]">
+                <div className="flex justify-between font-mono text-[11px] text-outline">
                   <span>Occupancy (115 / 200)</span>
-                  <span className="text-[#dae2fc]">57.5% Full</span>
+                  <span className="text-on-surface">57.5% Full</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#222a3d] overflow-hidden">
-                  <div className="h-full bg-[#ffb95f] w-[57%]" />
+                <div className="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                  <div className="h-full bg-tertiary w-[57%]" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-[#bcc9cd] pt-1">
+              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-on-surface-variant pt-1">
                 <span>Food Rations: 7-Day Supply</span>
                 <span>Generator: Diesel Backup</span>
               </div>
@@ -323,19 +323,19 @@ export const SafeCorridorsModule: React.FC = () => {
           </div>
 
           {/* Offline GPS Export Card */}
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex items-center justify-between shadow-xl">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex items-center justify-between shadow-xl">
             <div className="flex flex-col">
-              <span className="font-headline text-sm font-bold text-[#dae2fc]">
+              <span className="font-headline text-sm font-bold text-on-surface">
                 Download Offline GPX / KML
               </span>
-              <span className="font-body text-xs text-[#bcc9cd]">
+              <span className="font-body text-xs text-on-surface-variant">
                 Full vector track for handheld GPS & OsmAnd
               </span>
             </div>
             <button
               type="button"
               onClick={() => soundFx.playRadarPing()}
-              className="px-3 py-1.5 bg-[#222a3d] hover:bg-[#31394d] text-[#4cd7f6] rounded font-mono text-xs font-bold border border-[#4cd7f6]/40 flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1.5 bg-surface-container-high hover:bg-surface-bright text-primary rounded font-mono text-xs font-bold border border-primary/40 flex items-center gap-1 cursor-pointer"
             >
               <span className="material-symbols-outlined text-[16px]">download</span>
               <span>Export</span>

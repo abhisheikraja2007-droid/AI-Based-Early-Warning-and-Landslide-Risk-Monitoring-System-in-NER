@@ -17,7 +17,7 @@ class Settings:
     # Model filepaths
     PYTORCH_SPATIAL_MODEL_PATH: str = os.getenv("PYTORCH_SPATIAL_MODEL_PATH", "checkpoints/landslide_spatial_unet_best.pt")
     XGBOOST_TEMPORAL_MODEL_PATH: str = os.getenv("XGBOOST_TEMPORAL_MODEL_PATH", "checkpoints/landslide_temporal_xgboost.json")
-    NC_RAINFALL_PATH: str = os.getenv("NC_RAINFALL_PATH", "RF25_ind2025_rfp25.nc")
+    NC_RAINFALL_PATH: str = os.getenv("NC_RAINFALL_PATH", "data/rainfall/RF25_ind2025_rfp25.nc" if os.path.exists("data/rainfall/RF25_ind2025_rfp25.nc") else "RF25_ind2025_rfp25.nc")
 
     # Task Queue Broker (Redis)
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")

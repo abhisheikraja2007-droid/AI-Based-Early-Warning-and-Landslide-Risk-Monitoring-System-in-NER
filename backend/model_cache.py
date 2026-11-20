@@ -8,15 +8,21 @@ import os
 import time
 from typing import Dict, Any, Optional
 import numpy as np
-import torch
-import xgboost as xgb
-import shap
+try:
+    import xgboost as xgb
+except Exception:
+    xgb = None
+
+try:
+    import shap
+except Exception:
+    shap = None
 
 from backend.config import settings
-from dl_spatial_base.inference import LandslideSpatialBackend
-from temporal_engine.temporal_features import IMDRainfallFeatureEngine
-from temporal_engine.smap_soil_moisture import SMAPSoilMoistureProxy
-from temporal_engine.grid_alignment import SpatialGridAligner
+from ml.spatial_unet.inference import LandslideSpatialBackend
+from ml.temporal_engine.temporal_features import IMDRainfallFeatureEngine
+from ml.temporal_engine.smap_soil_moisture import SMAPSoilMoistureProxy
+from ml.temporal_engine.grid_alignment import SpatialGridAligner
 
 
 class ModelCache:

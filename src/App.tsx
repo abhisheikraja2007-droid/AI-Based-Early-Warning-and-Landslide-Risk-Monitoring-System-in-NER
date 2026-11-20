@@ -19,12 +19,17 @@ import { CorridorSegment } from './types/telemetry';
 import { soundFx } from './utils/audioAlert';
 
 export default function App() {
-  const [activeModule, setActiveModule] = useState<ModuleType>('corridor-surveillance');
-  const [appMode, setAppMode] = useState<'control_room' | 'citizen'>('control_room');
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+  const [activeModule, setActiveModule] = useState<ModuleType>(
+    (urlParams?.get('module') as ModuleType) || 'corridor-surveillance'
+  );
+  const [appMode, setAppMode] = useState<'control_room' | 'citizen'>(
+    (urlParams?.get('mode') as 'control_room' | 'citizen') || 'control_room'
+  );
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Modals
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(urlParams?.get('report') === 'true');
   const [isSMSModalOpen, setIsSMSModalOpen] = useState(false);
   const [selectedSegmentForModal, setSelectedSegmentForModal] = useState<CorridorSegment | null>(null);
 
@@ -60,7 +65,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b1326] text-[#dae2fc] font-body selection:bg-[#4cd7f6]/30 selection:text-[#4cd7f6] flex flex-col">
+    <div className="min-h-screen bg-[#0b1326] text-on-surface font-body selection:bg-primary/30 selection:text-primary flex flex-col">
       {/* Top Header Bar */}
       <Header
         appMode={appMode}
@@ -92,16 +97,16 @@ export default function App() {
         >
           {/* Mobile module navigation switcher (when in control room on small screens) */}
           {appMode === 'control_room' && (
-            <div className="lg:hidden flex items-center justify-between mb-4 p-2.5 bg-[#131b2e] rounded-lg border border-[#222a3d]">
+            <div className="lg:hidden flex items-center justify-between mb-4 p-2.5 bg-surface-container-low rounded-lg border border-surface-container-high">
               <button
                 type="button"
                 onClick={() => setIsMobileSidebarOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 bg-[#222a3d] text-[#4cd7f6] rounded font-mono text-xs font-bold"
+                className="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high text-primary rounded font-mono text-xs font-bold"
               >
                 <span className="material-symbols-outlined text-[18px]">menu</span>
                 <span>Operational Modules</span>
               </button>
-              <span className="font-mono text-xs text-[#dae2fc] font-semibold uppercase">
+              <span className="font-mono text-xs text-on-surface font-semibold uppercase">
                 {activeModule.replace('-', ' ')}
               </span>
             </div>

@@ -56,8 +56,15 @@ async def predict_landslide_async(
     # Resolve optional patch file
     patch_path = None
     if request.patch_filename:
-        # Check TrainData / ValidData / TestData
-        for sub in ["ValidData/img", "TrainData/img", "TestData/img"]:
+        # Check satellite patch folders in data/satellite_patches/ (and root fallbacks)
+        for sub in [
+            "data/satellite_patches/ValidData/img",
+            "data/satellite_patches/TrainData/img",
+            "data/satellite_patches/TestData/img",
+            "ValidData/img",
+            "TrainData/img",
+            "TestData/img",
+        ]:
             candidate = os.path.join(sub, request.patch_filename)
             if os.path.exists(candidate):
                 patch_path = candidate
@@ -137,7 +144,14 @@ async def predict_landslide_sync(request: InferenceRequest):
     # Resolve optional patch
     patch_path = None
     if request.patch_filename:
-        for sub in ["ValidData/img", "TrainData/img", "TestData/img"]:
+        for sub in [
+            "data/satellite_patches/ValidData/img",
+            "data/satellite_patches/TrainData/img",
+            "data/satellite_patches/TestData/img",
+            "ValidData/img",
+            "TrainData/img",
+            "TestData/img",
+        ]:
             candidate = os.path.join(sub, request.patch_filename)
             if os.path.exists(candidate):
                 patch_path = candidate

@@ -34,6 +34,7 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
   const [showSmapMoisture, setShowSmapMoisture] = useState(true);
   const [showShelters, setShowShelters] = useState(true);
   const [mapViewMode, setMapViewMode] = useState<'satellite' | 'tactical'>('satellite');
+  const [tacticalLayerMode, setTacticalLayerMode] = useState<'hybrid' | 'satellite' | 'contour'>('hybrid');
   const [is3DTilted, setIs3DTilted] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -357,9 +358,9 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
             {/* SATELLITE TERRAIN BACKDROP (from the user image asset / mockup) */}
             <div
               className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${
-                mapViewMode === 'satellite'
+                tacticalLayerMode === 'satellite'
                   ? 'opacity-85 mix-blend-normal'
-                  : mapViewMode === 'contour'
+                  : tacticalLayerMode === 'contour'
                   ? 'opacity-20 mix-blend-luminosity'
                   : 'opacity-45 mix-blend-luminosity'
               }`}
@@ -868,10 +869,10 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
                 <button
                   type="button"
                   onClick={() =>
-                    setMapViewMode(
-                      mapViewMode === 'hybrid'
+                    setTacticalLayerMode(
+                      tacticalLayerMode === 'hybrid'
                         ? 'satellite'
-                        : mapViewMode === 'satellite'
+                        : tacticalLayerMode === 'satellite'
                         ? 'contour'
                         : 'hybrid'
                     )
@@ -880,7 +881,7 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
                   title="Toggle Satellite vs Topo View"
                 >
                   <span className="material-symbols-outlined text-[16px]">layers</span>
-                  <span className="uppercase">{mapViewMode}</span>
+                  <span className="uppercase">{tacticalLayerMode}</span>
                 </button>
                 <div
                   className="w-8 h-8 rounded bg-surface-container-lowest flex items-center justify-center text-primary"
@@ -1244,7 +1245,7 @@ export const CorridorMapModule: React.FC<CorridorMapModuleProps> = ({
           {/* 4-STEP TIMELINE TRACK SCRUBBER */}
           <div className="relative py-1">
             {/* Baseline Rail */}
-            <div className="w-full h-2 bg-[#2d3449] rounded-full overflow-hidden flex">
+            <div className="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden flex">
               <div
                 className={`w-1/4 h-full transition-colors ${
                   currentStepIndex >= 0 ? 'bg-[#10b981]' : 'bg-surface-container-high'

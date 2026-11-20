@@ -65,17 +65,17 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
   return (
     <div className="flex flex-col gap-4 w-full">
       {/* Module Header Bar */}
-      <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-wrap items-center justify-between gap-3 shadow-lg">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+            <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
               // DISPATCH & INCIDENT COMMAND
             </span>
-            <span className="px-2 py-0.5 rounded bg-[#ef4444]/20 text-[#ffb3ad] font-mono text-[10px] font-bold">
+            <span className="px-2 py-0.5 rounded bg-[#ef4444]/20 text-secondary font-mono text-[10px] font-bold">
               STAGE-4 DISASTER ACTIVATED
             </span>
           </div>
-          <span className="font-headline text-xl text-[#dae2fc] font-bold">
+          <span className="font-headline text-xl text-on-surface font-bold">
             Search & Rescue (SAR), BRO Heavy Machinery & Emergency Broadcast
           </span>
         </div>
@@ -84,7 +84,7 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
           <button
             type="button"
             onClick={onBroadcastSMS}
-            className="px-3.5 py-2 rounded bg-[#06b6d4] hover:bg-[#4cd7f6] text-[#003640] font-mono text-xs font-bold uppercase flex items-center gap-2 shadow-lg transition-all cursor-pointer"
+            className="px-3.5 py-2 rounded bg-primary-container hover:bg-primary text-on-primary font-mono text-xs font-bold uppercase flex items-center gap-2 shadow-lg transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">campaign</span>
             <span>Trigger Mass SMS Broadcast</span>
@@ -92,7 +92,7 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
           <button
             type="button"
             onClick={onOpenReportModal}
-            className="px-3 py-2 rounded bg-[#222a3d] hover:bg-[#31394d] text-[#dae2fc] font-mono text-xs font-bold uppercase flex items-center gap-1.5 border border-[#2d3449] transition-colors cursor-pointer"
+            className="px-3 py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-mono text-xs font-bold uppercase flex items-center gap-1.5 border border-surface-container-highest transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">add_location_alt</span>
             <span>New Incident Log</span>
@@ -104,12 +104,12 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         {/* Left Column: Active Reported Incidents (col-span-6) */}
         <div className="xl:col-span-6 flex flex-col gap-4">
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-col gap-3 shadow-xl">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-col gap-3 shadow-xl">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+              <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
                 // ACTIVE HAZARD DISPATCH LOG
               </span>
-              <span className="font-mono text-xs text-[#869397]">
+              <span className="font-mono text-xs text-outline">
                 {incidents.length} Reported Events
               </span>
             </div>
@@ -125,38 +125,38 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
                     onClick={() => setSelectedIncident(inc)}
                     className={`p-3 rounded-lg border transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#171f32] border-[#4cd7f6] shadow-md'
-                        : 'bg-[#131b2e] border-[#222a3d] hover:bg-[#171f32]'
+                        ? 'bg-surface-container border-primary shadow-md'
+                        : 'bg-surface-container-low border-surface-container-high hover:bg-surface-container'
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex flex-col">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-[#dae2fc]">
+                          <span className="font-mono text-xs font-bold text-on-surface">
                             {inc.id}
                           </span>
                           <span
                             className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
                               isCritical
-                                ? 'bg-[#a40217]/50 text-[#ffb3ad] animate-pulse'
-                                : 'bg-[#e79400]/30 text-[#ffb95f]'
+                                ? 'bg-secondary-container/50 text-secondary animate-pulse'
+                                : 'bg-tertiary-container/30 text-tertiary'
                             }`}
                           >
                             {inc.status}
                           </span>
                         </div>
-                        <span className="font-headline text-sm font-semibold text-[#dae2fc] mt-1">
+                        <span className="font-headline text-sm font-semibold text-on-surface mt-1">
                           {inc.type}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] text-[#869397]">{inc.timestamp}</span>
+                      <span className="font-mono text-[10px] text-outline">{inc.timestamp}</span>
                     </div>
 
-                    <p className="font-body text-xs text-[#bcc9cd] mt-2 line-clamp-2">{inc.notes}</p>
+                    <p className="font-body text-xs text-on-surface-variant mt-2 line-clamp-2">{inc.notes}</p>
 
-                    <div className="mt-2 pt-2 border-t border-[#222a3d] flex items-center justify-between text-[11px] font-mono text-[#869397]">
+                    <div className="mt-2 pt-2 border-t border-surface-container-high flex items-center justify-between text-[11px] font-mono text-outline">
                       <span>{inc.sector} (Km {inc.kmMarker})</span>
-                      <span className="text-[#4cd7f6]">{inc.coords}</span>
+                      <span className="text-primary">{inc.coords}</span>
                     </div>
                   </div>
                 );
@@ -165,9 +165,9 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
           </div>
 
           {/* Incident Action Plan Checklist */}
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-col gap-3 shadow-xl">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-col gap-3 shadow-xl">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+              <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
                 // INCIDENT ACTION PLAN (IAP) ENFORCEMENT
               </span>
               <span className="font-mono text-xs text-[#10b981] font-bold">
@@ -181,18 +181,18 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
                   key={item.id}
                   type="button"
                   onClick={() => toggleAction(item.id)}
-                  className="flex items-center gap-3 p-2.5 rounded bg-[#171f32] hover:bg-[#222a3d] border border-[#222a3d] text-left transition-colors cursor-pointer"
+                  className="flex items-center gap-3 p-2.5 rounded bg-surface-container hover:bg-surface-container-high border border-surface-container-high text-left transition-colors cursor-pointer"
                 >
                   <span
                     className={`material-symbols-outlined text-[20px] ${
-                      item.completed ? 'text-[#10b981]' : 'text-[#869397]'
+                      item.completed ? 'text-[#10b981]' : 'text-outline'
                     }`}
                   >
                     {item.completed ? 'check_box' : 'check_box_outline_blank'}
                   </span>
                   <span
                     className={`font-body text-xs flex-1 ${
-                      item.completed ? 'text-[#dae2fc]' : 'text-[#869397]'
+                      item.completed ? 'text-on-surface' : 'text-outline'
                     }`}
                   >
                     {item.text}
@@ -205,9 +205,9 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
 
         {/* Right Column: Deployed SAR Teams & Field Equipment (col-span-6) */}
         <div className="xl:col-span-6 flex flex-col gap-4">
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-col gap-3 shadow-xl">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-col gap-3 shadow-xl">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+              <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
                 // DEPLOYED FIRST RESPONDERS & SAR ASSETS
               </span>
               <span className="font-mono text-xs text-[#10b981] font-bold">5 Units On-Grid</span>
@@ -217,32 +217,32 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
               {sarUnits.map((unit) => (
                 <div
                   key={unit.id}
-                  className="p-3 bg-[#171f32] rounded-lg border border-[#222a3d] flex flex-col gap-2"
+                  className="p-3 bg-surface-container rounded-lg border border-surface-container-high flex flex-col gap-2"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex flex-col">
-                      <span className="font-headline text-sm font-bold text-[#dae2fc]">
+                      <span className="font-headline text-sm font-bold text-on-surface">
                         {unit.name}
                       </span>
-                      <span className="font-mono text-[11px] text-[#4cd7f6]">{unit.type}</span>
+                      <span className="font-mono text-[11px] text-primary">{unit.type}</span>
                     </div>
                     <span className="px-2 py-0.5 rounded bg-[#10b981]/20 text-[#10b981] font-mono text-[10px] font-bold">
                       {unit.status}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 text-[11px] font-mono text-[#bcc9cd] pt-1">
+                  <div className="grid grid-cols-3 gap-2 text-[11px] font-mono text-on-surface-variant pt-1">
                     <div>
-                      <span className="text-[#869397] block text-[9px] uppercase">Location</span>
+                      <span className="text-outline block text-[9px] uppercase">Location</span>
                       <span>{unit.currentLocation}</span>
                     </div>
                     <div>
-                      <span className="text-[#869397] block text-[9px] uppercase">Strength</span>
+                      <span className="text-outline block text-[9px] uppercase">Strength</span>
                       <span className="text-white font-bold">{unit.personnelCount} Personnel</span>
                     </div>
                     <div>
-                      <span className="text-[#869397] block text-[9px] uppercase">Comms Channel</span>
-                      <span className="text-[#4cd7f6]">{unit.contactFrequency}</span>
+                      <span className="text-outline block text-[9px] uppercase">Comms Channel</span>
+                      <span className="text-primary">{unit.contactFrequency}</span>
                     </div>
                   </div>
                 </div>
@@ -251,20 +251,20 @@ export const DispatchModule: React.FC<DispatchModuleProps> = ({
           </div>
 
           {/* Emergency Communications Relay Card */}
-          <div className="bg-[#131b2e] p-4 rounded-xl border border-[#222a3d] flex flex-col gap-3 shadow-xl">
-            <span className="font-mono text-xs text-[#4cd7f6] uppercase tracking-wider font-semibold">
+          <div className="bg-surface-container-low p-4 rounded-xl border border-surface-container-high flex flex-col gap-3 shadow-xl">
+            <span className="font-mono text-xs text-primary uppercase tracking-wider font-semibold">
               // TACTICAL TELECOM & AIRLIFT STATUS
             </span>
             <div className="grid grid-cols-2 gap-3 font-mono text-xs">
-              <div className="p-3 bg-[#171f32] rounded border border-[#222a3d] flex flex-col gap-1">
-                <span className="text-[#869397] text-[10px] uppercase">Cell Tower Backup</span>
+              <div className="p-3 bg-surface-container rounded border border-surface-container-high flex flex-col gap-1">
+                <span className="text-outline text-[10px] uppercase">Cell Tower Backup</span>
                 <span className="text-[#10b981] font-bold">Airtel & Jio COW Operational</span>
-                <span className="text-[#869397] text-[10px]">Tupul VSAT Solar-Powered</span>
+                <span className="text-outline text-[10px]">Tupul VSAT Solar-Powered</span>
               </div>
-              <div className="p-3 bg-[#171f32] rounded border border-[#222a3d] flex flex-col gap-1">
-                <span className="text-[#869397] text-[10px] uppercase">Medical Helivac</span>
-                <span className="text-[#ffb95f] font-bold">Standby at Leikop</span>
-                <span className="text-[#869397] text-[10px]">Ceiling: 8,000 ft (Rain Squalls)</span>
+              <div className="p-3 bg-surface-container rounded border border-surface-container-high flex flex-col gap-1">
+                <span className="text-outline text-[10px] uppercase">Medical Helivac</span>
+                <span className="text-tertiary font-bold">Standby at Leikop</span>
+                <span className="text-outline text-[10px]">Ceiling: 8,000 ft (Rain Squalls)</span>
               </div>
             </div>
           </div>

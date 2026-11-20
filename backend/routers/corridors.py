@@ -18,6 +18,11 @@ router = APIRouter(prefix="/corridors", tags=["Corridors & Delta-GeoJSON Edge Up
 
 
 @router.get(
+    "",
+    response_model=CorridorStatusResponse,
+    summary="Get Full Baseline Corridor Geometry & Hazard Status"
+)
+@router.get(
     "/nh37-imphal-jiribam",
     response_model=CorridorStatusResponse,
     summary="Get Full Baseline Corridor Geometry & Hazard Status",

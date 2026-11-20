@@ -299,25 +299,25 @@ export const LiveSatelliteMap: React.FC<LiveSatelliteMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[620px] rounded-xl overflow-hidden border border-[#222a3d] shadow-2xl bg-[#060e20]">
+    <div className="relative w-full h-155 rounded-xl overflow-hidden border border-surface-container-high shadow-2xl bg-surface-container-lowest">
       {/* Live Leaflet Map Container */}
       <div ref={mapContainerRef} className="w-full h-full z-10" />
 
       {/* Top Floating Controls HUD */}
       <div className="absolute top-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         {/* Live Satellite Status Pill */}
-        <div className="pointer-events-auto flex items-center gap-2 bg-[#060e20]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#222a3d] shadow-lg">
+        <div className="pointer-events-auto flex items-center gap-2 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-surface-container-high shadow-lg">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10b981]"></span>
           </span>
-          <span className="font-mono text-xs font-bold text-[#dae2fc]">
-            LIVE SATELLITE FEED: <span className="text-[#4cd7f6]">{SATELLITE_PROVIDERS[activeTileSource].name}</span>
+          <span className="font-mono text-xs font-bold text-on-surface">
+            LIVE SATELLITE FEED: <span className="text-primary">{SATELLITE_PROVIDERS[activeTileSource].name}</span>
           </span>
         </div>
 
         {/* Tile Provider Switcher */}
-        <div className="pointer-events-auto flex items-center gap-1 bg-[#060e20]/90 backdrop-blur-md p-1 rounded-lg border border-[#222a3d] shadow-lg">
+        <div className="pointer-events-auto flex items-center gap-1 bg-surface-container-lowest/90 backdrop-blur-md p-1 rounded-lg border border-surface-container-high shadow-lg">
           {(Object.keys(SATELLITE_PROVIDERS) as (keyof typeof SATELLITE_PROVIDERS)[]).map((key) => (
             <button
               key={key}
@@ -325,8 +325,8 @@ export const LiveSatelliteMap: React.FC<LiveSatelliteMapProps> = ({
               onClick={() => setActiveTileSource(key)}
               className={`px-2.5 py-1 font-mono text-[11px] rounded transition-all font-semibold cursor-pointer ${
                 activeTileSource === key
-                  ? 'bg-[#06b6d4] text-[#003640] shadow'
-                  : 'text-[#869397] hover:text-[#dae2fc]'
+                  ? 'bg-primary-container text-on-primary shadow'
+                  : 'text-outline hover:text-on-surface'
               }`}
             >
               {key === 'esri_satellite' ? '🛰️ ESRI Satellite' : key === 'sentinel2' ? '🌍 Sentinel-2' : '🌑 Dark Vector'}
@@ -336,7 +336,7 @@ export const LiveSatelliteMap: React.FC<LiveSatelliteMapProps> = ({
             type="button"
             onClick={handleResetView}
             title="Reset Map View to NH-37 Corridor"
-            className="px-2 py-1 bg-[#171f32] text-[#4cd7f6] hover:bg-[#222a3d] rounded font-mono text-xs cursor-pointer ml-1"
+            className="px-2 py-1 bg-surface-container text-primary hover:bg-surface-container-high rounded font-mono text-xs cursor-pointer ml-1"
           >
             Reset
           </button>
@@ -344,22 +344,22 @@ export const LiveSatelliteMap: React.FC<LiveSatelliteMapProps> = ({
       </div>
 
       {/* Bottom Map Legend */}
-      <div className="absolute bottom-3 left-3 z-20 pointer-events-auto bg-[#060e20]/90 backdrop-blur-md p-2.5 rounded-lg border border-[#222a3d] shadow-xl text-xs font-mono flex items-center gap-3">
+      <div className="absolute bottom-3 left-3 z-20 pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-md p-2.5 rounded-lg border border-surface-container-high shadow-xl text-xs font-mono flex items-center gap-3">
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
-          <span className="text-[#dae2fc]">Normal</span>
+          <span className="text-on-surface">Normal</span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"></span>
-          <span className="text-[#dae2fc]">Watch</span>
+          <span className="text-on-surface">Watch</span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] animate-pulse"></span>
-          <span className="text-[#ffb3ad] font-bold">Evacuate</span>
+          <span className="text-secondary font-bold">Evacuate</span>
         </div>
-        <div className="flex items-center gap-1.5 border-l border-[#222a3d] pl-2">
-          <span className="w-3 h-1 bg-[#4cd7f6] rounded"></span>
-          <span className="text-[#4cd7f6]">Bhuvan Detour</span>
+        <div className="flex items-center gap-1.5 border-l border-surface-container-high pl-2">
+          <span className="w-3 h-1 bg-primary rounded"></span>
+          <span className="text-primary">Bhuvan Detour</span>
         </div>
       </div>
     </div>
